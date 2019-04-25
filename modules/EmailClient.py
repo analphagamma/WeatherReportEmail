@@ -22,7 +22,7 @@ class EmailBuilder:
         report and last_report are both dictionaries that are the output of the Report module
         Returns a dictionary where values are strings
         '''
-        header     = 'Weather forecast for {}\n'.format(report['date'])
+        header     = 'Weather forecast for {} in {}\n'.format(report['date'], report['location'])
         conditions = 'Tomorrow expect {}.\n'.format(', '.join(report['conditions']))
         low_temp   = 'The lowest temperature will be {}\u2103 at {}\n'.format(report['temp_low']['temp'], report['temp_low']['hour'][:-3])
         high_temp  = 'The highest temperature will be {}\u2103 at {}\n'.format(report['temp_high']['temp'], report['temp_high']['hour'][:-3])
@@ -32,11 +32,11 @@ class EmailBuilder:
         if report['trigger_warning']:
             warning += 'There will be'
             if report['snow_times']:
-                warning += ' snow at {}'.format(report['snow_time'])
+                warning += ' snow at {}'.format(', '.join(report['snow_times']))
             if report['rain_times']:
-                warning += ' rain at {}'.format(report['rain_time'])
+                warning += ' rain at {}'.format(', '.join(report['rain_times']))
             if report['thunderstorm_times']:
-                warning += ' a thunderstorm at {}'.format(report['thunderstorm_time'])
+                warning += ' a thunderstorm at {}'.format(', '.join(report['thunderstorm_times']))
 
             warning += '.\nHave a nice day!'
 

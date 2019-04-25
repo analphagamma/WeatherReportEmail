@@ -9,7 +9,7 @@ class EmailTest(unittest.TestCase):
 
     @unittest.skip('Skip - not sending email')
     def test2_sending(self):
-        with open('credentials.json', 'r+') as f: 
+        with open('resources/credentials.json', 'r') as f: 
             cred = json.load(f)
 
         client = EmailBuilder(cred['email'], cred['password'])
@@ -28,20 +28,20 @@ class EmailTest(unittest.TestCase):
     def test4_email(self):
 
         # setting up email server
-        with open('credentials.json', 'r+') as f: 
+        with open('resources/credentials.json', 'r') as f: 
             cred = json.load(f)
 
         client = EmailBuilder(cred['email'], cred['password'])
         client.connect_to_server()
 
         # getting content
-        with open('test_output.json', 'r+') as f:
+        with open('test_output.json', 'r') as f:
             report = json.load(f)
 
         content = client.create_email(report, None)
 
         # sending email
-        client.send_email(cred['to'], content['subj_line'], content['body'])
+        client.send_email(cred['to'], content['subject_line'], content['body'])
 
 
 

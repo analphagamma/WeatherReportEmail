@@ -1,0 +1,2 @@
+To run unit tests -> python -m unittest -p "*_test.py" from app directory
+To run application -> python main.py from app directory

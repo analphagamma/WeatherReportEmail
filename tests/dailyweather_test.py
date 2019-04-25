@@ -74,11 +74,13 @@ class DailyWeatherTest(unittest.TestCase):
         for use in the email_test.py test.
         '''
     
-        with open('sample.json', 'r+') as f: weather_data = json.load(f)
+        with open('resources/sample.json', 'r') as f:
+            weather_data = json.load(f)
         
         rp = ResponseParser(weather_data, todays_date=self.TODAY)
         report_output = rp.parse()
-        with open('test_output.json', 'w+') as f: json.dump(report_output, f)
+        with open('test_output.json', 'w+') as f:
+            json.dump(report_output, f)
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)

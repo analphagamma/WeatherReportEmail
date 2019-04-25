@@ -69,8 +69,10 @@ class DailyWeather:
     def get_condition_by_hour(self, hour):
         pass
 
-    def get_condition_by_description(self, cond):
-        pass
+    def get_fuzzy_condition(self, cond):
+        for key in self.conditions.keys():
+            if cond in key:
+                return self.conditions[key]
 
     def add_report(self, report):
         '''
@@ -102,15 +104,15 @@ class DailyWeather:
                 'wind': int(self.get_wind_high()*3.6),
                 'conditions': list(set(self.conditions.keys())),
                 'most_frequent_condition': '',
-                'rain_times': self.conditions.get('rain'),
-                'snow_times': self.conditions.get('snow'),
-                'thunderstorm_times': self.conditions.get('thunderstorm'),
+                'rain_times': self.get_fuzzy_condition('rain'),
+                'snow_times': self.get_fuzzy_condition('snow'),
+                'thunderstorm_times': self.get_fuzzy_condition('thunderstorm'),
                 'trigger_warning': trigger_warning,
                 'date': str(self.todays_date + dt.timedelta(days=1))
                 }
 
         # save report
-        with open('./resources/yesterday.json', 'w+') as f:
+        with open('./resources/today.json', 'w+') as f:
             json.dump(report, f)
 
         return report
