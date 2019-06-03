@@ -22,7 +22,7 @@ class EmailBuilder:
         report and last_report are both dictionaries that are the output of the Report module
         Returns a dictionary where values are strings
         '''
-        header     = 'Weather forecast for {} in {}\n'.format(report['date'], report['location'])
+        header     = 'Weather forecast for {}\n'.format(report['date'])
         conditions = 'Tomorrow expect {}.\n'.format(', '.join(report['conditions']))
         low_temp   = 'The lowest temperature will be {}\u2103 at {}\n'.format(report['temp_low']['temp'], report['temp_low']['hour'][:-3])
         high_temp  = 'The highest temperature will be {}\u2103 at {}\n'.format(report['temp_high']['temp'], report['temp_high']['hour'][:-3])
